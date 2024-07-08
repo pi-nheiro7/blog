@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -27,7 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::post('comment/{post}/{user}', [CommentController::class, 'store'])->name('comment.store');
     Route::delete('comment/{comment}/apagar', [CommentController::class, 'destroy'])->name('comment.destroy');
 
-
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('usuario/{user}/editar', [UserController::class, 'edit'])->name('user.edit');
+    Route::patch('usuario/{user}', [UserController::class, 'update'])->name('user.update');
 
 });

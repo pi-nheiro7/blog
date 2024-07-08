@@ -14,15 +14,18 @@
     <main class="container">
         <nav>
             <ul>
-                <li><strong><a href="{{route('post.index')}}">Blog</a></strong></li>
+                <li><strong><a href="{{ route('post.index') }}">Blog</a></strong></li>
             </ul>
             <ul>
                 @if (Auth::check())
                     @if (Auth::user()->avatar)
-                        <img src="{{asset('/storage/images/'.Auth::user()->avatar)}}" alt="Profile image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+                        <img src="{{ asset('/storage/images/' . Auth::user()->avatar) }}" alt="Profile image"
+                            style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
                     @endif
                     <li>
-                        {{ auth()->user()->name }}
+                        <a href="{{ route('user.edit', ['user' => Auth::user()->id]) }}">
+                            {{ auth()->user()->name }}
+                        </a>
                     </li>
                     <li>
                         <form action="{{ route('logout') }}" method="post">
