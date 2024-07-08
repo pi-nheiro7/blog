@@ -18,6 +18,9 @@
             </ul>
             <ul>
                 @if (Auth::check())
+                    @if (Auth::user()->avatar)
+                        <img src="{{asset('/storage/images/'.Auth::user()->avatar)}}" alt="Profile image" style="width: 80px;height: 80px; padding: 10px; margin: 0px; ">
+                    @endif
                     <li>
                         {{ auth()->user()->name }}
                     </li>

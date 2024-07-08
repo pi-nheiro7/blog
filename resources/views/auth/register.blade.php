@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('store') }}" method="post">
+    <form action="{{ route('store') }}" enctype="multipart/form-data" method="post">
         @csrf
         <label for="name">Nome: </label>
         <input type="text" name="name" required>
@@ -35,6 +35,9 @@
 
         <label for="password_confirmation">Confirmar Senha:</label>
         <input type="password" name="password_confirmation" required>
+
+        <label for="avatar">Avatar: </label>
+        <input type="file" name="avatar">
 
         <input type="submit" value="Cadastrar">
     </form>

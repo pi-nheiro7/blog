@@ -29,14 +29,18 @@ class AuthController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed|min:8'
-            ]);
+            'password' => 'required|confirmed|min:8',
+            'avatar' => 'required|mimes:jpg,jpeg,png,gif|max:1024'
+        ]);
 
+        $avatarName = $request->avatar->getClientOriginalName();
+        $request->avatar->storeAs('images', $avatarName, 'public');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'avatar' => $avatarName
         ]);
 
         event(new Registered($user));
@@ -54,7 +58,7 @@ class AuthController extends Controller
         ]);
 
 
-        if(Auth::attempt($credentials)){
+        if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return redirect()->intended(route('post.index'));
