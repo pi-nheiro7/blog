@@ -35,6 +35,10 @@
     @if ($comments)
         @foreach ($comments as $comment)
             <article>
+                @if ($comment->user()->first()->avatar)
+                    <img src="{{ asset('/storage/images/'.$comment->user()->first()->avatar) }}" alt="Profile image"
+                        style="width: 60px;height: 60px; padding: 10px; margin: 0px; ">
+                @endif
                 <kbd>{{ $comment->user()->first()->name }}</kbd>
                 <p>{{ $comment->comment }}</p>
                 <small>comentado em: {{ date('d/m/y H:i', strtotime($comment->created_at)) }}</small>
