@@ -6,7 +6,7 @@
 -   MySQL ou MariaDB
 -   Node/NPM
 
-#### Etapas:
+**_Etapas_**
 
 1. composer install
 2. npm install (ou yarn)
